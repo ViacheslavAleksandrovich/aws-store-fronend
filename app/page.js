@@ -1,30 +1,11 @@
 "use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-import { useEffect, useState } from "react";
-
-export default function HomePage() {
-  const [products, setProducts] = useState([]);
-
+export default function Home() {
+  const router = useRouter();
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`)
-      .then((res) => res.json())
-      .then(setProducts)
-      .catch(console.error);
+    router.push("/login");
   }, []);
-
-  return (
-    <main style={{ padding: "2rem" }}>
-      <h1>Каталог товарів</h1>
-      {products.length === 0 && <p>Завантаження...</p>}
-      <ul>
-        {products.map((p) => (
-          <li key={p.id}>
-            <h3>{p.name}</h3>
-            <p>{p.description}</p>
-            <strong>{p.price} грн</strong>
-          </li>
-        ))}
-      </ul>
-    </main>
-  );
+  return null;
 }
